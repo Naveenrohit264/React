@@ -1,0 +1,67 @@
+/* NewLandingStyles.css */
+
+
+/* Styling for the new landing page container */
+.newlandingpage {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Styling for the new video background */
+.newbackgroundvideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Styling for the new content (text and button) */
+.newcontent {
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.newgetstartedbutton {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 12em; /* Adjust margin for responsiveness */
+}
+
+.newgetstartedbutton:hover {
+  background-color: #e55600;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  /* Adjustments for smaller screens */
+  .newgetstartedbutton {
+    font-size: 1em; /* Modify font size */
+  }
+  
+  .newbackgroundvideo {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Adjustments for even smaller screens */
+  .newgetstartedbutton {
+    font-size: 0.8em; /* Further modify font size */
+    margin-top: 13em; /* Adjust margin to move button down */
+  }
+}
+
