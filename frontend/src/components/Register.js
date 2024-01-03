@@ -70,7 +70,7 @@ const Register = () => {
 
     if (valid) {
       try {
-        const response = await axios.post("http://localhost:8800/signup", inputs);
+        const response = await axios.post("http://192.168.30.76:8800/signup", inputs);
 
         if (response.status === 200) {
           setSignupSuccess(true); // Set success message to display

@@ -25,7 +25,7 @@ const Movie = () => {
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/getMovieDetails/${id}`, {
+        const response = await axios.get(`http://192.168.30.76:8800/getMovieDetails/${id}`, {
           withCredentials: true,
         });
         const data = response.data;
@@ -33,10 +33,10 @@ const Movie = () => {
         if (data && data.length > 0) {
           const movie = data[0];
           setMovieData({
-            backgroundImage: `http://localhost:8800/${movie.image_path}`,
+            backgroundImage: `http://192.168.30.76:8800/${movie.image_path}`,
             title: `Title: ${movie.title}`,
             description: `Description: ${movie.description}`,
-            imagePath: `http://localhost:8800/${movie.image_path}`,
+            imagePath: `http://192.168.30.76:8800/${movie.image_path}`,
             videoPath: movie.video_path,
           });
         } else {
@@ -53,7 +53,7 @@ const Movie = () => {
   useEffect(() => {
     const checkWatchlist = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/isInWatchlist/${profileId}/${id}`, {
+        const response = await axios.get(`http://192.168.30.76:8800/isInWatchlist/${profileId}/${id}`, {
           withCredentials: true,
         });
         setIsInWatchlist(response.data.isInWatchlist);
@@ -73,7 +73,7 @@ const Movie = () => {
     try {
       if (!isInWatchlist && !addingToWatchlist) {
         setAddingToWatchlist(true);
-        await axios.post(`http://localhost:8800/addToWatchlist/${profileId}`, {
+        await axios.post(`http://192.168.30.76:8800/addToWatchlist/${profileId}`, {
           movieId: id,
           title: movieData.title.split(': ')[1],
         }, {

@@ -16,7 +16,7 @@ const MoviesPage = () => {
   const videoSrc = "Videos/U-Turn.mp4";
 
   useEffect(() => {
-    fetch("http://localhost:8800/getMovieDetailsSearch")
+    fetch("http://192.168.30.76:8800/getMovieDetailsSearch")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -50,7 +50,7 @@ const MoviesPage = () => {
              <NavLink to={`/movie/${movie.id}`} key={index} className={styles.movies2card}>
                 <div className={styles.movies2imgbox}>
                   <img
-                    src={`http://localhost:8800/${movie.image_path}`}
+                    src={`http://192.168.30.76:8800/${movie.image_path}`}
                     alt={movie.title}
                   />
                 </div>

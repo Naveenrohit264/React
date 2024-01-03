@@ -13,7 +13,7 @@ const WatchlistDisplay = () => {
     if (profileId) {
       const fetchWatchlist = async () => {
         try {
-          const response = await axios.get(`http://localhost:8800/watchlist/${profileId}`, {
+          const response = await axios.get(`http://192.168.30.76:8800/watchlist/${profileId}`, {
             withCredentials: true,
           });
 
@@ -34,7 +34,7 @@ const WatchlistDisplay = () => {
 
   const removeFromWatchlist = async (movieId) => {
     try {
-      const response = await axios.delete(`http://localhost:8800/removeFromWatchlist/${profileId}/${movieId}`, {
+      const response = await axios.delete(`http://192.168.30.76:8800/removeFromWatchlist/${profileId}/${movieId}`, {
         withCredentials: true,
       });
 
@@ -60,7 +60,7 @@ const WatchlistDisplay = () => {
             <div className={styles.videoitem} key={video.movieId}>
               <h3 className={styles.videotitle}>{video.uploadTitle}</h3>
               <div className={styles.videothumbnailcontainer}>
-                <img className={styles.videothumbnail} src={`http://localhost:8800/${video.image_path}`} alt="Video Thumbnail" />
+                <img className={styles.videothumbnail} src={`http://192.168.30.76:8800/${video.image_path}`} alt="Video Thumbnail" />
               </div>
               <button onClick={() => removeFromWatchlist(video.movieId)} className={styles.removeButton}>
                 Remove 

@@ -36,7 +36,7 @@ app.use(
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://192.168.30.76:3000",
   })
 );
 app.use(cookieParser());
@@ -835,7 +835,7 @@ app.get("/getMovieDetails", (req, res) => {
         title: movie.title,
         genre: movie.genre,
         description: movie.description,
-        imagePath: `http://localhost:8800/${movie.image_path}`
+        imagePath: `http://192.168.30.76:8800/${movie.image_path}`
         // video_path is fetched but not sent to the frontend
       }));
 
@@ -926,23 +926,31 @@ app.get("/getMovieDetails/:id", (req, res) => {
 });
 
 // restrict
-
 app.get("/movie-titles", (req, res) => {
-  const query = "SELECT title FROM uploads"; // Assuming 'uploads' table contains movie titles
-
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error("Error fetching movie titles:", error);
-      res
-        .status(500)
-        .json({ success: false, error: "Failed to fetch movie titles" });
-    } else {
-      const movieTitles = results.map((result) => result.title);
-      res.status(200).json({ success: true, titles: movieTitles });
+  connection.query("SELECT title FROM uploads", (err, results) => {
+    if (err) {
+      console.error("Error fetching movie titles:", err);
+      res.status(500).json({ success: false, error: "Failed to fetch movie titles" });
+      return;
     }
+    const movieTitles = results.map((result) => result.title);
+    res.status(200).json({ success: true, titles: movieTitles });
   });
 });
 
+// Endpoint to fetch restricted movies for a specific profile
+app.get("/restricted-movies/:profileId", (req, res) => {
+  const { profileId } = req.params;
+  connection.query("SELECT movieTitle FROM movies_restrict WHERE profileId = ?", profileId, (err, results) => {
+    if (err) {
+      console.error("Error fetching restricted movies:", err);
+      res.status(500).json({ success: false, error: "Failed to fetch restricted movies" });
+      return;
+    }
+    const restrictedMovies = results.map((result) => result.movieTitle);
+    res.status(200).json({ success: true, restrictedMovies });
+  });
+});
 
 app.get("/genres-restrict", (req, res) => {
   const query = "SELECT genre FROM genres"; // Assuming 'genres' table contains genre names
@@ -1199,7 +1207,8 @@ app.get("/child-notification", (req, res) => {
 
 const PORT = process.env.PORT || 8800;
 
-app.listen(PORT, (req, res) => {
+
+app.listen(PORT,'0.0.0.0', () => {
   console.log(`server running on ${PORT}`);
 });
 

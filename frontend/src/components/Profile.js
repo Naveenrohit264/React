@@ -16,7 +16,7 @@ const ProfilesList = () => {
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        const response = await fetch("http://localhost:8800/profiles", {
+        const response = await fetch("http://192.168.30.76:8800/profiles", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -100,7 +100,7 @@ const handleAddProfile = () => {
                   </p>
                   {profile.profilePhotoPath ? (
                     <img
-                      src={`http://localhost:8800/${profile.profilePhotoPath}`}
+                      src={`http://192.168.30.76:8800/${profile.profilePhotoPath}`}
                       alt={profile.name}
                       className={styles.pic}
                     />

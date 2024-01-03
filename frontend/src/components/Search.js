@@ -13,7 +13,7 @@ const Search = () => {
 
   useEffect(() => {
     // Fetch movie details from the backend
-    fetch("http://localhost:8800/getMovieDetailsSearch")
+    fetch("http://192.168.30.76:8800/getMovieDetailsSearch")
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
@@ -175,7 +175,7 @@ const Search = () => {
               <div className={styles.searchcard} key={index}>
                 <div className={styles.searchimgbox}>
                   <img
-                    src={`http://localhost:8800/${movie.image_path}`}
+                    src={`http://192.168.30.76:8800/${movie.image_path}`}
                     alt={movie.title}
                   />
                 </div>

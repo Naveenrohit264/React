@@ -21,7 +21,7 @@ const ForgotPassword = () => {
   const generateAndSendOTP = () => {
     setIsLoading(true); // Set loading state to true before sending OTP
     axios
-      .post("http://localhost:8800/send-otp", { email })
+      .post("http://192.168.30.76:8800/send-otp", { email })
 
       .then((response) => {
         setMessage(`OTP sent successfully to ${email}`);

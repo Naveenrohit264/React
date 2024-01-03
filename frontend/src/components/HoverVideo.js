@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { fontWeight } from "@mui/system";
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 const HoverVideo = ({ imageSrc, videoSrc, title, description }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -38,7 +40,7 @@ const HoverVideo = ({ imageSrc, videoSrc, title, description }) => {
               fontSize: "30px",
             }}
           >
-            {isMuted ? "🔈" : "🔊"}
+            {isMuted ? <VolumeUpIcon /> : <VolumeOffIcon />}
           </button>
         </div>
       ) : (

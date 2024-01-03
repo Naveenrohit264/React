@@ -195,7 +195,7 @@ function VideoPlayer() {
     console.log("Video Path:", videoPath);
   
     axios
-      .get(`http://localhost:8800/getVideoInfo/${videoPath}`)
+      .get(`http://192.168.30.76:8800/getVideoInfo/${videoPath}`)
       .then((response) => {
         console.log("Server Response:", response.data);
         setVideoTitle(response.data.videoTitle || "Default Video Title");
@@ -365,7 +365,7 @@ function VideoPlayer() {
             ref={playerRef}
             width="100%"
             height="100%"
-            url={`http://localhost:8800/${videoPath}`}
+            url={`http://192.168.30.76:8800/${videoPath}`}
             pip={pip}
             playing={playing}
             controls={false}

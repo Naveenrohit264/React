@@ -14,6 +14,10 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import SettingsIcon from '@mui/icons-material/Settings';
 
+
+
+
+
 const NotificationCard = ({ notification }) => {
   const timeAgo = formatDistanceToNow(new Date(notification.upload_time), {
     addSuffix: true,
@@ -24,7 +28,7 @@ const NotificationCard = ({ notification }) => {
     <div className="notification-card">
       <img
         className="thumbnail"
-        src={`http://localhost:8800/${notification.image_path}`}
+        src={`http://192.168.30.76:8800/${notification.image_path}`}
         alt="Thumbnail"
       />
       <div className="notification-details">
@@ -85,14 +89,17 @@ const handleLogout = async () => {
 };
 
 const Nav = () => {
+
+
   const [notifications, setNotifications] = useState([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const { currentUser, logout } = useContext(AuthContext);
   useEffect(() => {
+    
     // Fetch data from uploads table
     axios
-      .get("http://localhost:8800/notifications")
+      .get("http://192.168.30.76:8800/notifications")
       .then((response) => {
         const storedNotifications =
           JSON.parse(localStorage.getItem("notifications")) || [];
@@ -126,11 +133,11 @@ const Nav = () => {
   const markNotificationsSeen = () => {
     // Mark notifications as seen on the server
     axios
-      .put("http://localhost:8800/mark-notifications-seen")
+      .put("http://192.168.30.76:8800/mark-notifications-seen")
       .then(() => {
         // Refresh data and update unseen count
         axios
-          .get("http://localhost:8800/notifications")
+          .get("http://192.168.30.76:8800/notifications")
           .then((response) => {
             const storedNotifications =
               JSON.parse(localStorage.getItem("notifications")) || [];
@@ -151,7 +158,7 @@ const Nav = () => {
   const handleNotificationClick = (notificationId) => {
     // Fetch movies based on the clicked notification id
     axios
-      .get(`http://localhost:8800/movies/${notificationId}`)
+      .get(`http://192.168.30.76:8800/movies/${notificationId}`)
       .then((response) => {
         // Handle the movies data (e.g., display them in a modal)
         console.log(response.data);
@@ -191,11 +198,11 @@ const Nav = () => {
       <header>
         <nav className="nav-navbar">
           <div className="nav-logo">
-           <Link to="/home"> <img
-              src="images/latest_realm.png"
-              alt="Logo"
-              style={{ height: "30px", width: "auto" }}
-            />
+              <Link to="/home"> <img
+      src={`/images/latest_realm.png?${Date.now()}`}
+      alt="Logo"
+      style={{ height: "30px", width: "auto" }}
+    />
             </Link>
           </div>
           <div className="nav-container">

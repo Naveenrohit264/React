@@ -31,6 +31,7 @@ import WatchlistVideos from "./components/WatchlistVideos";
 import Movies from "./components/Movies";
 import GenrePage from "./components/GenrePage";
 import ChildHome from "./components/ChildHome";
+import Test from "./components/Test";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -44,6 +45,9 @@ function App() {
       </div>
     );
   };
+  
+
+  
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -62,10 +66,16 @@ function App() {
     }
   };
 
+  
+
   const router = createBrowserRouter([
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/test",
+      element: <Test />,
     },
     {
       path: '/pin/:profileId/',

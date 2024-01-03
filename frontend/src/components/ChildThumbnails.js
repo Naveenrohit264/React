@@ -13,11 +13,11 @@ const ChildThumbnails = () => {
     const fetchData = async () => {
       try {
         // Fetch genres
-        const genresResponse = await axios.get("http://localhost:8800/genres");
+        const genresResponse = await axios.get("http://192.168.30.76:8800/genres");
         setGenres(genresResponse.data);
 
         // Fetch child-friendly movies
-        const childMoviesResponse = await axios.get("http://localhost:8800/getChildFriendlyMovies");
+        const childMoviesResponse = await axios.get("http://192.168.30.76:8800/getChildFriendlyMovies");
         const childMovies = childMoviesResponse.data;
 
         // Group child movies by genre
@@ -69,7 +69,7 @@ const ChildThumbnails = () => {
                   <div className="card">
                     <div className="img-box">
                       <img
-                        src={`http://localhost:8800/${movie.image_path}`}
+                        src={`http://192.168.30.76:8800/${movie.image_path}`}
                         alt={movie.title}
                       />
                     </div>

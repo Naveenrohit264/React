@@ -331,7 +331,7 @@ const Controls = forwardRef((props, ref) => {
             </Typography>
           </Grid>
           <Grid item>
-            <Button
+            {/* <Button
               onClick={onBookmark}
               variant="contained"
               color="primary"
@@ -339,7 +339,7 @@ const Controls = forwardRef((props, ref) => {
               className={classes.bookmarkButton}
             >
               Bookmark
-            </Button>
+            </Button> */}
           </Grid>
         </Grid>
         <Grid container direction="row" alignItems="center" justify="center">

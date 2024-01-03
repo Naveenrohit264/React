@@ -51,7 +51,7 @@ input[type="password"]:focus {
 /* Register Button Styles */
 .register-button {
   width: 40%;
-  background-color: #e82c0a;
+  background-color: orangered;
   color: #fff;
   cursor: pointer;
   font-size: 16px;

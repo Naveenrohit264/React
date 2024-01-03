@@ -12,14 +12,14 @@ export const AuthContextProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.post("http://localhost:8800/signin", inputs, {
+    const res = await axios.post("http://192.168.30.76:8800/signin", inputs, {
       withCredentials: true,
     });
     setCurrentUser(res.data);
   };
 
   const logout = async () => {
-    await axios.post("http://localhost:8800/logout", null, {
+    await axios.post("http://192.168.30.76:8800/logout", null, {
       withCredentials: true,
     });
 

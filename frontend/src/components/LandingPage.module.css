@@ -1,67 +1,281 @@
-/* NewLandingStyles.css */
-
-
-/* Styling for the new landing page container */
-.newlandingpage {
+.fullWidthPage {
   position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
+.blurredImageContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
 
-/* Styling for the new video background */
-.newbackgroundvideo {
+.blurredImage {
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+}
+
+.getStartedButton:hover{
+  background-color: rgb(234, 91, 40);
+  cursor: pointer;
+}
+
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Styling for the new content (text and button) */
-.newcontent {
+.overlayContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   color: white;
   z-index: 1;
 }
 
-.newgetstartedbutton {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #ff6600;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 12em; /* Adjust margin for responsiveness */
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.newgetstartedbutton:hover {
-  background-color: #e55600;
+.contentWrapper h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+  margin-top: 18%;
+
 }
 
-/* Media queries for responsiveness */
-@media screen and (max-width: 768px) {
-  /* Adjustments for smaller screens */
-  .newgetstartedbutton {
-    font-size: 1em; /* Modify font size */
-  }
+.contentWrapper h4 {
+  font-size: 1em;
+  margin-bottom: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+  color: #ffffff;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+
+.emailBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
   
-  .newbackgroundvideo {
-    width: 100%;
-    height: auto;
-  }
 }
 
-@media screen and (max-width: 480px) {
-  /* Adjustments for even smaller screens */
-  .newgetstartedbutton {
-    font-size: 0.8em; /* Further modify font size */
-    margin-top: 13em; /* Adjust margin to move button down */
-  }
+.emailInput {
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5em;
+  width: 90%;
+  
 }
 
+.getStartedButton {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: orangered;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  width: 90%;
+  font-weight: 900;
+  padding-top: 4%;
+  margin-left: 2%;
+}
+
+.logo {
+  position: absolute;
+  top: -60px; /* Adjust as needed for precise positioning */
+  left: -140px; /* Adjust as needed for precise positioning */
+  color: white;
+}
+
+.logo img {
+  height: 50px; /* Set the desired height of the logo image */
+  width: auto; /* Maintain aspect ratio */
+}
+.signInButton {
+  position: absolute;
+  top: -60px; /* Adjust as needed for precise positioning */
+  right: 10px; /* Adjust as needed for precise positioning */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color:orangered;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.additionalContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8%; /* Adjust margin as needed */
+  margin-bottom: 8%;
+}
+
+.additionalContent p{
+  color: white;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.5rem;
+}
+
+
+.textLeft {
+  flex: 1;
+  text-align: left;
+  color: white;
+  margin-left: 15%;
+  font-size: 1.5em;
+}
+
+.textLeft h1{
+margin-right: 20%;
+}
+
+.textLeft p{
+  margin-right: 20%;
+  }
+
+.gifRight {
+  flex: 1;
+  text-align: right;
+}
+
+.gifRight img {
+  max-width: 100%; /* Ensure the GIF fits within the container */
+  margin-right: 25%;
+}
+
+.Download{
+  width: 100%;
+  margin-left: 20%;
+}
+
+.watchanywhere{
+  margin-right: 20%;
+  width:80%;
+}
+
+.gifRight h1 {
+  flex: 1;
+  color: white;
+  font-size: 1.5em;
+  white-space: pre-line; /* Allows line breaks */
+}
+
+.horizontalLine {
+
+  border-top: 8px solid rgb(38, 37, 37); /* Increase the border thickness to increase line height */
+
+}
+
+.children{
+  width: 80%;
+  margin-left: 35%;
+}
+
+.faqSection {
+  background-color: #000000; /* Set the background color to black */
+  color: #ffffff; /* Set text color to white */
+  padding: 20px; /* Adjust padding as needed */
+}
+
+.faqSection h1{
+  margin-left: 28%;
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.faqItem {
+  background-color: #808080; /* Set grey background color for each question */
+  margin-bottom: 20px; /* Add margin between each FAQ item */
+ 
+  width: 80%; /* Set width to 100% for consistent width */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Aligns content vertically */
+  justify-content: space-between; /* Create space between question and icon */
+  margin-left: 12%;
+
+}
+
+.faqItem h3 {
+  font-size: 20px; /* Adjust heading font size */
+  margin: 0; /* Remove default margins */
+  display: flex; /* Use flexbox for icon alignment */
+  align-items: center; /* Aligns the text and icon horizontally */
+ font-family: 'Times New Roman', Times, serif;
+ margin-left: 2%;
+ font-weight: 600;
+}
+
+.faqItem p {
+  font-size: 16px; /* Adjust paragraph font size */
+  line-height: 1.5; /* Set line height for readability */
+}
+
+
+
+/* Footer.module.css */
+
+.footer {
+  color: #fff;
+  padding: 20px 0;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footerLogo img {
+  width: 100px;
+  height: auto;
+}
+
+.footerLinks ul,
+.footerSocial ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+.footerLinks ul li,
+.footerSocial ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.footerLinks ul li a,
+.footerSocial ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+}

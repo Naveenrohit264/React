@@ -18,7 +18,7 @@ const Thumbnails = ({profileId}) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8800/genres")
+      .get("http://192.168.30.76:8800/genres")
       .then((response) => {
         setGenres(response.data);
         fetchMoviesByGenre(response.data);
@@ -39,7 +39,7 @@ const Thumbnails = ({profileId}) => {
   const fetchMoviesByGenre = (genres) => {
     const genrePromises = genres.map((genre) => {
       return axios
-      .get(`http://localhost:8800/getMoviesByGenre/${genre.id}/${profileId}`,)
+      .get(`http://192.168.30.76:8800/getMoviesByGenre/${genre.id}/${profileId}`,)
         .then((response) => response.data)
         .catch((error) => {
           console.error(
@@ -153,7 +153,7 @@ const Thumbnails = ({profileId}) => {
                   <div className="card">
                     <div className="img-box">
                       <img
-                        src={`http://localhost:8800/${movie.image_path}`}
+                        src={`http://192.168.30.76:8800/${movie.image_path}`}
                         alt={movie.title}
                       />
                     </div>

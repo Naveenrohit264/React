@@ -22,7 +22,7 @@ const FileUpload = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8800/genres")
+      .get("http://192.168.30.76:8800/genres")
       .then((response) => {
         setGenres(response.data);
       })
@@ -64,7 +64,7 @@ const FileUpload = () => {
     formData.append("ageRating", selectedAgeRating);
 
     axios
-      .post("http://localhost:8800/upload", formData)
+      .post("http://192.168.30.76:8800/upload", formData)
       .then((response) => {
         console.log(response.data);
         setUploadMessage("Files uploaded and data saved successfully.");
