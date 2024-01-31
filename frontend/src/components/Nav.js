@@ -28,7 +28,7 @@ const NotificationCard = ({ notification }) => {
     <div className="notification-card">
       <img
         className="thumbnail"
-        src={`http://192.168.30.76:8800/${notification.image_path}`}
+        src={`http://192.168.0.11:8800/${notification.image_path}`}
         alt="Thumbnail"
       />
       <div className="notification-details">
@@ -48,7 +48,7 @@ const ProfileDropdown = () => {
     { icon: <PersonIcon />, label: "Manage Profiles", path: "/profiles" },
     { icon: <BookmarkBorderIcon />, label: "Watchlist", path: "/watchlist" },
     { icon: <AccountCircleIcon />, label: "Account",path: "/restrict" },
-    { icon: <SettingsIcon />, label: "Settings", path: "/settings" },
+    
     { icon: <ExitToAppIcon />, label: "Sign Out", path: "/sign-out" },
   ];
 
@@ -99,7 +99,7 @@ const Nav = () => {
     
     // Fetch data from uploads table
     axios
-      .get("http://192.168.30.76:8800/notifications")
+      .get("http://192.168.0.11:8800/notifications")
       .then((response) => {
         const storedNotifications =
           JSON.parse(localStorage.getItem("notifications")) || [];
@@ -133,11 +133,11 @@ const Nav = () => {
   const markNotificationsSeen = () => {
     // Mark notifications as seen on the server
     axios
-      .put("http://192.168.30.76:8800/mark-notifications-seen")
+      .put("http://192.168.0.11:8800/mark-notifications-seen")
       .then(() => {
         // Refresh data and update unseen count
         axios
-          .get("http://192.168.30.76:8800/notifications")
+          .get("http://192.168.0.11:8800/notifications")
           .then((response) => {
             const storedNotifications =
               JSON.parse(localStorage.getItem("notifications")) || [];
@@ -158,7 +158,7 @@ const Nav = () => {
   const handleNotificationClick = (notificationId) => {
     // Fetch movies based on the clicked notification id
     axios
-      .get(`http://192.168.30.76:8800/movies/${notificationId}`)
+      .get(`http://192.168.0.11:8800/movies/${notificationId}`)
       .then((response) => {
         // Handle the movies data (e.g., display them in a modal)
         console.log(response.data);
@@ -215,6 +215,12 @@ const Nav = () => {
           </div>
           <div className="nav-align-right">
             <ul className="nav-nav-list">
+               
+            <li className="nav-nav-item">
+                <Link to="/Search" className="nav-search-icon">
+                  <SearchIcon /> {/* Use FaSearch icon */}
+                </Link>
+              </li>
             <li className="nav-item">
                 <div
                   className="notification-icon"
@@ -245,15 +251,12 @@ const Nav = () => {
                 )}
               </li>
 
-              <li className="nav-nav-item">
-                <Link to="/Search" className="nav-search-icon">
-                  <SearchIcon /> {/* Use FaSearch icon */}
-                </Link>
-              </li>
 
+           
               <li className="nav-nav-item">
                 <span className="nav-profile-icon"><PersonIcon />  <ProfileDropdown /></span> {/* Use FaUser icon */}
               </li>
+             
             </ul>
           </div>
         </nav>

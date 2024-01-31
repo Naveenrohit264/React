@@ -18,6 +18,8 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
   next();
@@ -36,7 +38,7 @@ app.use(
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://192.168.30.76:3000",
+    origin: "http://192.168.0.11:3000",
   })
 );
 app.use(cookieParser());
@@ -219,6 +221,8 @@ app.post("/signup", async (req, res) => {
       .json({ success: false, message: "Error during signup process" });
   }
 });
+
+
 
 // signin
 app.post("/signin", async (req, res) => {
@@ -691,9 +695,7 @@ app.put(
 app.delete("/edit-profile/:profileId", checkUserToken, (req, res) => {
   const profileId = req.params.profileId;
 
-  // Implement code to delete the profile with the specified profileId
-
-  // Example query
+  // Example query to delete the profile with the specified profileId
   const deleteProfileQuery = 'DELETE FROM newprofiles WHERE id = ? AND userId = ?';
   connection.query(deleteProfileQuery, [profileId, req.userId], (error, result) => {
     if (error) {
@@ -707,10 +709,31 @@ app.delete("/edit-profile/:profileId", checkUserToken, (req, res) => {
       return;
     }
 
-    console.log('Profile deleted successfully');
-    res.status(200).json({ success: true, message: 'Profile deleted successfully' });
+    // Example query to delete data related to the deleted profile from movies_restrict table
+    const deleteMoviesDataQuery = 'DELETE FROM movies_restrict WHERE profileId = ? AND userId = ?';
+    connection.query(deleteMoviesDataQuery, [profileId, req.userId], (error, deleteMoviesResult) => {
+      if (error) {
+        console.error('Error deleting movies data:', error);
+        res.status(500).json({ success: false, message: 'Error deleting movies data' });
+        return;
+      }
+
+      // Example query to delete data related to the deleted profile from watchlist table
+      const deleteWatchlistDataQuery = 'DELETE FROM watchlist WHERE profileId = ? AND userId = ?';
+      connection.query(deleteWatchlistDataQuery, [profileId, req.userId], (error, deleteWatchlistResult) => {
+        if (error) {
+          console.error('Error deleting watchlist data:', error);
+          res.status(500).json({ success: false, message: 'Error deleting watchlist data' });
+          return;
+        }
+
+        console.log('Profile and related data deleted successfully');
+        res.status(200).json({ success: true, message: 'Profile and related data deleted successfully' });
+      });
+    });
   });
 });
+
 
 
 
@@ -791,9 +814,15 @@ app.get("/notifications", (req, res) => {
 
 
 app.get("/getMovieDetailsSearch", (req, res) => {
-  const selectQuery = `SELECT * FROM uploads`;
+  const profileId = req.query.profileId; // Get the profileId from the query parameters
+  const selectQuery = `
+    SELECT u.*
+    FROM uploads u
+    LEFT JOIN movies_restrict mr ON u.title = mr.movieTitle AND mr.profileId = ?
+    WHERE mr.id IS NULL OR mr.id IS NULL
+  `;
 
-  connection.query(selectQuery, (err, result) => {
+  connection.query(selectQuery, [profileId], (err, result) => {
     if (err) {
       console.log(err);
       return res
@@ -835,7 +864,7 @@ app.get("/getMovieDetails", (req, res) => {
         title: movie.title,
         genre: movie.genre,
         description: movie.description,
-        imagePath: `http://192.168.30.76:8800/${movie.image_path}`
+        imagePath: `http://192.168.0.11:8800/${movie.image_path}`
         // video_path is fetched but not sent to the frontend
       }));
 
@@ -1203,6 +1232,48 @@ app.get("/child-notification", (req, res) => {
     return res.status(200).json(results);
   });
 });
+
+
+// --------------------
+
+app.get('/movie-titles', (req, res) => {
+  const query = 'SELECT title FROM uploads'; // Assuming the 'uploads' table contains the movie titles
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error fetching movie titles:', err.message);
+      res.status(500).json({ success: false, error: 'Internal Server Error' });
+    } else {
+      const movieTitles = results.map((result) => result.title);
+      res.json({ success: true, titles: movieTitles });
+    }
+  });
+});
+
+
+app.post('/savePayment', (req, res) => {
+  try {
+    const { userId, amount } = req.body;
+
+    // Insert payment details into the 'payments' table
+    const insertQuery = 'INSERT INTO payments (userId, amount) VALUES (?, ?)';
+    const values = [userId, amount];
+
+    connection.query(insertQuery, values, (error, results) => {
+      if (error) {
+        console.error('Error inserting payment details:', error);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+      } else {
+        console.log('Payment details saved successfully');
+        res.status(200).json({ success: true });
+      }
+    });
+  } catch (error) {
+    console.error('Error saving payment details:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
 
 
 const PORT = process.env.PORT || 8800;

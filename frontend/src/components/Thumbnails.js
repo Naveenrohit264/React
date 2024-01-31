@@ -5,6 +5,7 @@ import "./Thumbnails.css";
 import { AuthContext } from "../context/authContext";
 
 
+
 const Thumbnails = ({profileId}) => {
   const [genres, setGenres] = useState([]);
   const [moviesByGenre, setMoviesByGenre] = useState({});
@@ -18,7 +19,7 @@ const Thumbnails = ({profileId}) => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.30.76:8800/genres")
+      .get("http://192.168.0.11:8800/genres")
       .then((response) => {
         setGenres(response.data);
         fetchMoviesByGenre(response.data);
@@ -39,7 +40,7 @@ const Thumbnails = ({profileId}) => {
   const fetchMoviesByGenre = (genres) => {
     const genrePromises = genres.map((genre) => {
       return axios
-      .get(`http://192.168.30.76:8800/getMoviesByGenre/${genre.id}/${profileId}`,)
+      .get(`http://192.168.0.11:8800/getMoviesByGenre/${genre.id}/${profileId}`,)
         .then((response) => response.data)
         .catch((error) => {
           console.error(
@@ -133,7 +134,7 @@ const Thumbnails = ({profileId}) => {
           textDecoration: "none", // Remove underline
         }}
       >
-        Explore All
+        Explore All >
       </p>
     </div>
   )}
@@ -153,7 +154,7 @@ const Thumbnails = ({profileId}) => {
                   <div className="card">
                     <div className="img-box">
                       <img
-                        src={`http://192.168.30.76:8800/${movie.image_path}`}
+                        src={`http://192.168.0.11:8800/${movie.image_path}`}
                         alt={movie.title}
                       />
                     </div>

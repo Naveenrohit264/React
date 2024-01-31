@@ -19,6 +19,7 @@ import FullScreen from "@material-ui/icons/Fullscreen";
 import Popover from "@material-ui/core/Popover";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { Link } from 'react-router-dom';
+import { color } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   controlsWrapper: {
@@ -472,7 +473,9 @@ const Controls = forwardRef((props, ref) => {
               className={classes.bottomIcons}
               variant="text"
             >
-              <Typography>{playbackRate}X</Typography>
+             <Typography style={{ fontSize: '18px', fontWeight: 'bold', color: 'white' }}>
+  {playbackRate}X
+</Typography>
             </Button>
 
             <Popover
@@ -498,12 +501,11 @@ const Controls = forwardRef((props, ref) => {
                     variant="text"
                     
                     
+                    
                   >
-                    <Typography
-                      color={rate === playbackRate ? "secondary" : "inheri"}
-                    >
-                      {rate}X
-                    </Typography>
+               <Typography style={{ color: rate === playbackRate ? "orangered" : "inherit", fontSize: '16px', fontWeight: 'bold' }}>
+  {rate}X
+</Typography>
                   </Button>
                 ))}
               </Grid>

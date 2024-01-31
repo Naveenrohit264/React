@@ -16,7 +16,7 @@ const NotificationCard = ({ notification }) => {
     <div className="notification-card">
       <img
         className="thumbnail"
-        src={`http://192.168.30.76:8800/${notification.image_path}`}
+        src={`http://192.168.0.11:8800/${notification.image_path}`}
         alt="Thumbnail"
       />
       <div className="notification-details">
@@ -36,7 +36,7 @@ const NavChild = () => {
   useEffect(() => {
     // Fetch data from child-notifications endpoint
     axios
-      .get("http://192.168.30.76:8800/child-notification")
+      .get("http://192.168.0.11:8800/child-notification")
       .then((response) => {
         const storedNotifications =
           JSON.parse(localStorage.getItem("notifications")) || [];
@@ -69,11 +69,11 @@ const NavChild = () => {
   const markNotificationsSeen = () => {
     // Mark notifications as seen on the server
     axios
-      .put("http://192.168.30.76:8800/mark-notifications-seen")
+      .put("http://192.168.0.11:8800/mark-notifications-seen")
       .then(() => {
         // Refresh data and update unseen count
         axios
-          .get("http://192.168.30.76:8800/child-notifications")
+          .get("http://192.168.0.11:8800/child-notifications")
           .then((response) => {
             const storedNotifications =
               JSON.parse(localStorage.getItem("notifications")) || [];
@@ -94,7 +94,7 @@ const NavChild = () => {
   const handleNotificationClick = (notificationId) => {
     // Fetch movies based on the clicked notification id
     axios
-      .get(`http://192.168.30.76:8800/movies/${notificationId}`)
+      .get(`http://192.168.0.11:8800/movies/${notificationId}`)
       .then((response) => {
         // Filter out 18+ movies
         const filteredMovies = response.data.filter(

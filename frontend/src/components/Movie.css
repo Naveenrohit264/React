@@ -11,6 +11,16 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  z-index: 2; /* Adjust the z-index to make sure it's above the overlay */
 }
 
 /* Movie image container */
@@ -61,8 +71,8 @@
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 5px;
-  margin-left: 20px;
-  margin-right: 5px;
+  margin-left: 5%;
+ 
 }
 
 /* Movie description */
@@ -134,5 +144,5 @@
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
   font-size: 1.2em;
-  color: red;
+  color: green;
 }

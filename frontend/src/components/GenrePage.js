@@ -14,7 +14,7 @@ const GenrePage = () => {
   useEffect(() => {
     // Fetch genre name from the server based on genreId
     axios
-      .get(`http://192.168.30.76:8800/getGenreName/${genreId}`)
+      .get(`http://192.168.0.11:8800/getGenreName/${genreId}`)
       .then((response) => {
         setGenreName(response.data.genreName);
       })
@@ -24,7 +24,7 @@ const GenrePage = () => {
 
     // Fetch movies by genre
     axios
-      .get(`http://192.168.30.76:8800/getMoviesByGenreOne/${genreId}`)
+      .get(`http://192.168.0.11:8800/getMoviesByGenreOne/${genreId}`)
       .then((response) => {
         setMovies(response.data);
       })
@@ -53,7 +53,7 @@ const GenrePage = () => {
           <div key={movie.id} className={styles.moviethumbnail1}>
             <Link to={`/movie/${movie.id}`} className="link">
               <img
-                src={`http://192.168.30.76:8800/${movie.image_path}`}
+                src={`http://192.168.0.11:8800/${movie.image_path}`}
                 alt={movie.title}
               />
               <div className={styles.content1}>

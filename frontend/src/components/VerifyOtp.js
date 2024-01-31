@@ -14,7 +14,7 @@ const VerifyOTP = ({ email }) => {
    const verifyOTP = (email) => { // Pass email as an argument
     const combinedOTP = otp.join('');
     axios
-      .post('http://192.168.30.76:8800/verify-otp', { email, otp: combinedOTP })
+      .post('http://192.168.0.11:8800/verify-otp', { email, otp: combinedOTP })
       .then((response) => {
         if (response.status === 200) {
           if (response.data && response.data.message === 'OTP verified successfully.') {

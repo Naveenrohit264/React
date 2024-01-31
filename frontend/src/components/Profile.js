@@ -16,7 +16,7 @@ const ProfilesList = () => {
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        const response = await fetch("http://192.168.30.76:8800/profiles", {
+        const response = await fetch("http://192.168.0.11:8800/profiles", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -77,20 +77,19 @@ const handleAddProfile = () => {
   }
 };
 
-  return (
-    <>
-      <div className={styles.prodiv}>
-        <RealmLogo />
-
-        <div className={styles.profiles}>
-          <h2>Choose your profile and dive in</h2>
-          {errorMessage && <p className={styles.errormessage}>{errorMessage}</p>}
-          <ul>
-            {profiles.map((profile, index) => (
-
-              <li key={index}>
-                <div className={styles.profileinfo}>
-                  <p onClick={() => handlePinValidation(profile.id)}>
+return (
+  <div className={styles.addprofilebuttoncontainer}>
+  <div className={styles.profilesContainer}>
+    <RealmLogo />
+    <div className={styles.profiles}>
+    <h2>Who is Watching ?</h2>
+    {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+    <div className={styles.profilesList}>
+      {profiles.map((profile, index) => (
+        <div key={index} className={styles.profileItem}>
+          <div className={styles.profileinfo}>
+          <p onClick={() => handlePinValidation(profile.id)}>
+            
                     {profile.name}
                     {profile.pin && (
                       <span className={styles.lockicon} title="PIN protected">
@@ -100,7 +99,7 @@ const handleAddProfile = () => {
                   </p>
                   {profile.profilePhotoPath ? (
                     <img
-                      src={`http://192.168.30.76:8800/${profile.profilePhotoPath}`}
+                      src={`http://localhost:8800/${profile.profilePhotoPath}`}
                       alt={profile.name}
                       className={styles.pic}
                     />
@@ -119,27 +118,28 @@ const handleAddProfile = () => {
                   <button className={styles.editpro} onClick={() => handleEditProfile(profile.id)}>
                     <EditIcon />
                   </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+             
+          </div>
         </div>
+      ))}
+ 
 
-        <div className={styles.addprofilebuttoncontainer}>
-          {profiles.length < 4 && (
+      {profiles.length < 4 && (
             <button
-              className={styles.addprofilebutton}
+              className={`${styles.addProfileButton} ${styles.addProfileButtonDynamic}`}
               onClick={handleAddProfile}
               disabled={profiles.length >= 4}
             >
               <AddIcon />
             </button>
-          )}
-        </div>
+         
+        )}
       </div>
-    </>
+    </div>
+    </div>
+    </div>
   );
 };
-
+ 
 export default ProfilesList;
 

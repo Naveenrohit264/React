@@ -30,8 +30,15 @@ import VideoPlayer from "./components/VideoPlayer";
 import WatchlistVideos from "./components/WatchlistVideos";
 import Movies from "./components/Movies";
 import GenrePage from "./components/GenrePage";
+import Admin from "./components/Admin";
 import ChildHome from "./components/ChildHome";
 import Test from "./components/Test";
+import Plan1 from "./components/Plan1";
+import Plan2 from "./components/Plan2";
+import Plan3 from "./components/Plan3";
+import Plan4 from "./components/Plan4";
+import Plans from "./components/Plans";
+import PaymentPage from "./components/PaymentPage";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -97,6 +104,7 @@ function App() {
       path: "/forgotpassword",
       element: <ForgotPassword />, // Include EditProfile component for editing profiles
     },
+   
     {
       path: "/VerifyOtp",
       element: <VerifyOtp />, // Include EditProfile component for editing profiles
@@ -155,7 +163,30 @@ function App() {
           path: "/home",
           element: <Home />,
         },
-      
+        {
+          path: "/plans",
+          element: <Plans />,
+        },
+        {
+          path: "/plan1",
+          element: <Plan1 />,
+        },
+        {
+          path: "/plan2",
+          element: <Plan2 />,
+        },
+        {
+          path: "/plan3",
+          element: <Plan3 />,
+        },
+        {
+          path: "/plan4",
+          element: <Plan4 />,
+        },
+        {
+          path: "/pay/:price",
+          element: <PaymentPage />,
+        },
 
 
         {
@@ -165,6 +196,10 @@ function App() {
         {
           path: "/restrict",
           element: <Restrict />,
+        },
+        {
+          path: "/admin",
+          element: <Admin />,
         },
         {
           path: "/edit-profile/:profileId",

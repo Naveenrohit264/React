@@ -27,7 +27,15 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(inputs);
-      navigate("/profiles");
+  
+      // Check if the logged-in user's email is "uploader@gmail.com"
+      if (inputs.email === "uploader@gmail.com") {
+        // If yes, navigate to the admin page
+        navigate("/admin");
+      } else {
+        // If not, navigate to the profiles page
+        navigate("/profiles");
+      }
     } catch (err) {
       console.log(err);
       setErr(err.response.data.message);
@@ -37,7 +45,7 @@ const Login = () => {
   // JSX return
   return (
     <div>
-      <RealmLogo />
+      <RealmLogo  style={{ marginTop: '100px'}} />
 
       <div className={styles["login-container"]}>
         <div className={styles.card}>
@@ -50,6 +58,7 @@ const Login = () => {
                 name="email"
                 onChange={handleChange}
               />
+
               <input
                 type="password"
                 placeholder="Password"

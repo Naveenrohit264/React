@@ -21,7 +21,7 @@ const PasswordReset = () => {
 
   const resetPassword = () => {
     axios
-      .post('http://192.168.30.76:8800/reset-password', { newPassword, confirmPassword })
+      .post('http://192.168.0.11:8800/reset-password', { newPassword, confirmPassword })
       .then((response) => {
         setResetMessage('Password changed successfully.'); // Set success message after password reset
         setTimeout(() => {

@@ -5,7 +5,7 @@ import HoverVideo from "./HoverVideo";
 const App = () => {
   const imageSrc =
     "https://static.toiimg.com/thumb/msid-101553026,width-1280,resizemode-4/101553026.jpg";
-  const videoSrc = "Videos/Salaar_tr2.webm?${Date.now()}";
+    const videoSrc = `videos/salaar_tr.mp4`;
   const title = "Salaar";
   const description =
     "A gang leader tries to keep a promise made to his dying friend and takes on the other criminal gangs.";

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import styles from "./FileUpload.module.css";
 import RealmLogo from "./RealmLogo";
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +23,7 @@ const FileUpload = () => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.30.76:8800/genres")
+      .get("http://192.168.0.11:8800/genres")
       .then((response) => {
         setGenres(response.data);
       })
@@ -64,7 +65,7 @@ const FileUpload = () => {
     formData.append("ageRating", selectedAgeRating);
 
     axios
-      .post("http://192.168.30.76:8800/upload", formData)
+      .post("http://192.168.0.11:8800/upload", formData)
       .then((response) => {
         console.log(response.data);
         setUploadMessage("Files uploaded and data saved successfully.");
@@ -98,7 +99,7 @@ const FileUpload = () => {
 
   return (
     <div>
-        <RealmLogo />
+      <Link to="/admin">  <RealmLogo /></Link>
     <div className={styles.fileuploadcontainer}>
       <h2 className={styles.movieh}>Movie Upload</h2>
       <div className={styles.fileinputcontainer}>

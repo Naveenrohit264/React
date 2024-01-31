@@ -16,7 +16,7 @@ const PinPage = () => {
   useEffect(() => {
     const fetchProfileDetails = async () => {
       try {
-        const response = await fetch(`http://192.168.30.76:8800/profiles/${profileId}`, {
+        const response = await fetch(`http://192.168.0.11:8800/profiles/${profileId}`, {
           method: 'GET',
           credentials: 'include',
           headers: {

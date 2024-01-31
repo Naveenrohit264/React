@@ -10,6 +10,7 @@ const UserProfilesDropdown = () => {
   const [selectedProfile, setSelectedProfile] = useState({ id: "", name: "" });
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
+  const [restrictedMovies, setRestrictedMovies] = useState([]);
   const navigate = useNavigate();
 
   const showSuccessPopup = () => {
@@ -19,10 +20,15 @@ const UserProfilesDropdown = () => {
     }, 3000); // Adjust the duration as needed
   };
 
+  const resetForm = () => {
+    setSelectedProfile({ id: "", name: "" });
+    setSelectedMovies([]);
+  };
+
   useEffect(() => {
     const fetchProfiles = async () => {
       try {
-        const response = await axios.get("http://192.168.30.76:8800/profiles", {
+        const response = await axios.get("http://192.168.0.11:8800/profiles", {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
@@ -41,7 +47,7 @@ const UserProfilesDropdown = () => {
 
     const fetchMovieTitles = async () => {
       try {
-        const response = await axios.get("http://192.168.30.76:8800/movie-titles", {
+        const response = await axios.get("http://192.168.0.11:8800/movie-titles", {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
@@ -65,7 +71,7 @@ const UserProfilesDropdown = () => {
   const saveMovieDetails = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.30.76:8800/save-movies",
+        "http://192.168.0.11:8800/save-movies",
         {
           profileId: selectedProfile.id,
           profileName: selectedProfile.name,
@@ -81,6 +87,7 @@ const UserProfilesDropdown = () => {
 
       if (response.data.success) {
         showSuccessPopup();
+        resetForm(); // Reset the form after successful save
       } else {
         throw new Error("Failed to save movie details");
       }
@@ -89,24 +96,11 @@ const UserProfilesDropdown = () => {
     }
   };
 
-  const navigateToProfile = (e) => {
-    const selectedProfileId = e.target.value;
-    const selectedProfileName = e.target.options[e.target.selectedIndex].text;
-
-    setSelectedProfile({
-      id: selectedProfileId,
-      name: selectedProfileName,
-    });
-  };
-
-  const filteredProfiles = profiles.slice(1);
-  const [restrictedMovies, setRestrictedMovies] = useState([]);
-
   useEffect(() => {
     const fetchRestrictedMovies = async () => {
       try {
         if (selectedProfile.id) {
-          const response = await axios.get(`http://192.168.30.76:8800/restricted-movies/${selectedProfile.id}`, {
+          const response = await axios.get(`http://192.168.0.11:8800/restricted-movies/${selectedProfile.id}`, {
             withCredentials: true,
             headers: {
               "Content-Type": "application/json",
@@ -114,7 +108,6 @@ const UserProfilesDropdown = () => {
           });
 
           if (response.data.success) {
-         
             setRestrictedMovies(response.data.restrictedMovies);
           } else {
             throw new Error("Failed to fetch restricted movies");
@@ -128,7 +121,18 @@ const UserProfilesDropdown = () => {
     fetchRestrictedMovies();
   }, [selectedProfile.id]);
 
+  const filteredProfiles = profiles.slice(1);
   const filteredMovieTitles = movieTitles.filter((title) => !restrictedMovies.includes(title));
+
+  const navigateToProfile = (e) => {
+    const selectedProfileId = e.target.value;
+    const selectedProfileName = e.target.options[e.target.selectedIndex].text;
+
+    setSelectedProfile({
+      id: selectedProfileId,
+      name: selectedProfileName,
+    });
+  };
 
   const handleMovieSelection = (selectedMovieValues) => {
     setSelectedMovies(selectedMovieValues);

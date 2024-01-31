@@ -1,37 +1,47 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useContext } from "react";
+import { AuthContext } from '../context/authContext';
 import styles from "./Search.module.css";
 import { NavLink, useLocation,Link} from "react-router-dom";
 import { FaSearch, FaMicrophone, FaTimes } from "react-icons/fa";
+
 import RealmLogo from './RealmLogo';
 const Search = () => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const { profileId } = useContext(AuthContext);
   const [voiceSearchActive, setVoiceSearchActive] = useState(false);
   const inputRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
     // Fetch movie details from the backend
-    fetch("http://192.168.30.76:8800/getMovieDetailsSearch")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        // Include profileId as a query parameter if available
+        const url = `http://192.168.0.11:8800/getMovieDetailsSearch${profileId ? `?profileId=${profileId}` : ''}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+  
         setMovies(data);
         setFilteredMovies(data); // Initially, set filteredMovies to all movies
-
+  
         // Check for query parameter 'search' in URL
         const params = new URLSearchParams(location.search);
         const searchParam = params.get('search');
-
+  
         if (searchParam) {
           setSearchTerm(searchParam);
           handleSearch(searchParam);
         }
-      })
-      .catch((error) => {
-        console.log("Error fetching movie details:", error);
-      });
-  }, [location.search]); // Run useEffect when location.search changes
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
+      }
+    };
+  
+    fetchData();
+  }, [location.search, profileId]);
 
   const handleSearch = (searchTerm) => {
     setSearchTerm(searchTerm);
@@ -175,7 +185,7 @@ const Search = () => {
               <div className={styles.searchcard} key={index}>
                 <div className={styles.searchimgbox}>
                   <img
-                    src={`http://192.168.30.76:8800/${movie.image_path}`}
+                    src={`http://192.168.0.11:8800/${movie.image_path}`}
                     alt={movie.title}
                   />
                 </div>

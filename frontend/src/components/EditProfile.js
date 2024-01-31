@@ -20,7 +20,7 @@ const EditProfileForm = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://192.168.30.76:8800/profile-details/${profileId}`,
+          `http://192.168.0.11:8800/profile-details/${profileId}`,
           {
             method: "GET",
             credentials: "include",
@@ -61,7 +61,7 @@ const EditProfileForm = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this profile?");
     if (confirmDelete) {
       try {
-        const response = await fetch(`http://192.168.30.76:8800/edit-profile/${profileId}`, {
+        const response = await fetch(`http://192.168.0.11:8800/edit-profile/${profileId}`, {
           method: "DELETE",
           credentials: "include",
         });
@@ -77,7 +77,7 @@ const EditProfileForm = () => {
         setTimeout(() => {
           setShowDeletePopup(false); // Hide the popup after 3 seconds
           navigate("/profiles");
-        }, 3000);
+        }, 1500);
       } catch (error) {
         console.error("Error deleting profile:", error.message);
         // Handle error (e.g., show an error message)
@@ -96,7 +96,7 @@ const EditProfileForm = () => {
       formData.append("profilePhoto", profileData.profilePhoto);
 
       const response = await fetch(
-        `http://192.168.30.76:8800/edit-profile/${profileId}`,
+        `http://192.168.0.11:8800/edit-profile/${profileId}`,
         {
           method: "PUT",
           credentials: "include",

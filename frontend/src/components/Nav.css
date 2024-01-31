@@ -49,9 +49,7 @@
   font-size: 20px;
   color: white; /* Set icon color */
 }
-/* .nav-nav-item span:hover {
-  color: orangered;
-}*/
+
 
 .notification-icon,
 .nav-search-icon,
@@ -65,6 +63,22 @@
   transition: color 0.3s;
 }
 
+
+.nav-search-icon,
+.nav-profile-icon{
+margin-top: 10%;
+}
+
+.nav-search-icon{
+  margin-top: 18%;
+}
+
+.nav-profile-icon{
+  background-color: #555;
+  border-radius: 50%;
+  padding: 5%;
+}
+
 .notification-icon:hover,
 .nav-nav-item:hover .notification-icon {
   color: orangered; /* Change to the desired color on hover */
@@ -74,6 +88,7 @@
   cursor: pointer;
   position: relative;
   display: inline-block; /* Display as inline block so that the container doesn't span full width */
+ margin-top: 3%;
 }
 
 .notification-container {
@@ -184,7 +199,7 @@
 
 .nav-dropdown-item:hover {
   background-color: grey;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .nav-dropdown-item-icon {
   margin-right: 8px; /* Adjust the margin as needed */

@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,Link } from 'react-router-dom';
 import './Movie.css';
 import { AuthContext } from '../context/authContext';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import RealmLogo from "./RealmLogo";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Movie = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { profileId } = useContext(AuthContext);
+  const { profileId,currentUser } = useContext(AuthContext);
 
   const [movieData, setMovieData] = useState({
     backgroundImage: '',
@@ -22,10 +23,12 @@ const Movie = () => {
   const [addingToWatchlist, setAddingToWatchlist] = useState(false);
   const [addedMessage, setAddedMessage] = useState('');
 
+
+
   useEffect(() => {
     const fetchMovieData = async () => {
       try {
-        const response = await axios.get(`http://192.168.30.76:8800/getMovieDetails/${id}`, {
+        const response = await axios.get(`http://192.168.0.11:8800/getMovieDetails/${id}`, {
           withCredentials: true,
         });
         const data = response.data;
@@ -33,10 +36,10 @@ const Movie = () => {
         if (data && data.length > 0) {
           const movie = data[0];
           setMovieData({
-            backgroundImage: `http://192.168.30.76:8800/${movie.image_path}`,
+            backgroundImage: `http://192.168.0.11:8800/${movie.image_path}`,
             title: `Title: ${movie.title}`,
             description: `Description: ${movie.description}`,
-            imagePath: `http://192.168.30.76:8800/${movie.image_path}`,
+            imagePath: `http://192.168.0.11:8800/${movie.image_path}`,
             videoPath: movie.video_path,
           });
         } else {
@@ -53,7 +56,7 @@ const Movie = () => {
   useEffect(() => {
     const checkWatchlist = async () => {
       try {
-        const response = await axios.get(`http://192.168.30.76:8800/isInWatchlist/${profileId}/${id}`, {
+        const response = await axios.get(`http://192.168.0.11:8800/isInWatchlist/${profileId}/${id}`, {
           withCredentials: true,
         });
         setIsInWatchlist(response.data.isInWatchlist);
@@ -66,14 +69,15 @@ const Movie = () => {
   }, [id, profileId]);
 
   const handlePlayButtonClick = () => {
-    navigate(`/video/${encodeURIComponent(movieData.videoPath)}`);
+    // navigate(`/video/${encodeURIComponent(movieData.videoPath)}`);
+    navigate('/plans');
   };
 
   const handleToggleWatchlist = async () => {
     try {
       if (!isInWatchlist && !addingToWatchlist) {
         setAddingToWatchlist(true);
-        await axios.post(`http://192.168.30.76:8800/addToWatchlist/${profileId}`, {
+        await axios.post(`http://192.168.0.11:8800/addToWatchlist/${profileId}`, {
           movieId: id,
           title: movieData.title.split(': ')[1],
         }, {
@@ -91,9 +95,11 @@ const Movie = () => {
       setAddingToWatchlist(false);
     }
   };
+ 
 
   return (
     <div className="movie-container">
+        <Link className="logo" to="/home"><RealmLogo /></Link>
       <div className='movie-gradient-overlay'>
         <div className="movie-background-image" style={{ backgroundImage: `url(${movieData.backgroundImage})` }}>
           <div className="movie-info-container">
@@ -103,6 +109,9 @@ const Movie = () => {
           <div className="movie-image-container">
             <img className="movie-image" src={movieData.imagePath} alt={movieData.title} />
           </div>
+         
+   
+
           <button className="movie-play-button" onClick={handlePlayButtonClick}>
             <PlayCircleOutlineIcon />
           </button>

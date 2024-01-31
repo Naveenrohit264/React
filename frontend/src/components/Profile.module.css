@@ -1,38 +1,39 @@
-.prodiv {
+.profilesContainer {
   background-color: black;
 }
-
-
+ 
+ 
 .profiles .profile-info:hover .lock-icon {
   opacity: 1;
   filter: brightness(1.5); /* Adjust brightness for highlighting effect */
 }
-
-
+ 
+ 
 .profileinfo{
  color: black;
+ 
 }
-
+ 
 .profiles ul {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
 }
-
-
+ 
+ 
 .profiles {
   margin-left: 27%;
   /* text-align: center;  */
 }
-
-
+ 
+ 
 .profiles h2 {
-  font-size: 30px;
-  margin-left: 13%; /* Adjust the font size to your desired value */
+  font-size: 35px;
+  margin-left:13%; /* Adjust the font size to your desired value */
   color: white;
 }
-
+ 
 .profiles li {
   margin: 10px;
   padding: 10px;
@@ -40,50 +41,54 @@
   max-width: 200px; /* Maximum width for each profile item */
   margin-left: -2%;
 }
-
-
-.profiles p {
+ 
+  
+.profileinfo p {
+  font-size: 1.2em; /* Set the font size for the profile name */
+  font-weight: bold; /* Make the profile name bold */
+  cursor: pointer; /* Add a pointer cursor to indicate it's clickable */
+  margin-bottom: 5px; /* Add some space below the profile name */
   position: relative;
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 5px;
+  color:whitesmoke;
+  
+  
 }
-
-
+ 
 .profiles .profileinfo {
   position: relative;
   color: white;
 }
-
-
+ 
+ 
 .profiles .lockicon {
   position: absolute;
   top: 150%;                                                                                                                                                          
-  left: 40%;
+  left: 30%;
   transform: translate(-50%, -50%);
   opacity: 0; /* Initially hide the lock icon */
-  transition: opacity 0.3s ease; 
-  color: whitesmoke; 
+  transition: opacity 0.3s ease;
+  color: orangered;
 }
-
-
+ 
+ 
 .profiles .editpro {
   position: absolute;
   top: 85%; /* Adjust the vertical position as needed */
-  left: 45%; /* Adjust the horizontal position as needed */
+  left: 85%; /* Adjust the horizontal position as needed */
   transform: translate(-50%, -50%);
   opacity: 0; /* Initially hide the icons */
   transition: opacity 0.3s ease;
   color: whitesmoke;
+
 }
-
-
+ 
+ 
 .profiles .profileinfo:hover .lockicon,
 .profiles .profileinfo:hover .editpro {
   opacity: 1; /* Show the icons when hovering over the profile */
 }
-
-
+ 
+ 
 .profiles .editpro {
   background: orangered;
   color: whitesmoke;
@@ -92,59 +97,77 @@
   border-radius: 50%;
   cursor: pointer;
 }
-
-
+ 
+ 
 .profiles .pic {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
+ 
+ 
 
+ 
+ 
+/* Add this to your existing styles */
+.profilesList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8%;
 
-.profiles .addprofilebutton {
-  margin-left: 70%;
-  color: aliceblue;
-  background-color: orangered;
-  clip-path: circle(50% at 50% 50%); 
 }
 
 
-.addprofilebutton {
-  /* Styles for the 'Add Profile' button */
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 15px 20px; /* Adjust padding for larger size */
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0px;
+
+
+.profilesList .profileItem{
+  margin-left: 6%;
 }
+ 
+.addprofilebuttonDynamic {
+  margin-top: 10px; /* Adjust the vertical margin as needed */
+  margin-left: 10px; /* Adjust the horizontal margin as needed */
 
+}
+ 
+ 
 
+ 
 .addprofilebutton svg {
-  font-size: 50px; 
+  font-size: 50px;
 }
 
+
+
+
+.profiles img:hover{
+  border: 2px solid orangered;
+}
+
+.addProfileButtonDynamic:hover{
+  border: 3px solid black;
+  border-radius: 80%;
+  background-color: white;
+  color: black;
+}
+
+.addProfileButtonDynamic{
+  margin-top: 8%;
+  margin-left: 5%;
+  padding: 1%;
+  color: black;
+  background: white;
+  border: 2px solid orangered;
+  border-radius: 80%;
+  height: 5%;
+}
+
+
+ 
 .profiles li p {
   /* Style for the profile names within list items */
   font-size: 18px; /* Change the font size to your desired value */
   /* Additional styles as needed */
-}
-
-.addprofilebuttoncontainer {
-  text-align: center;
-  margin-top: -120px; /* Adjust the margin as needed */
-  padding-left: 60%;
-}
-
-.addprofilebutton {
-  /* Adjust the styles for the "Add" button */
-  background-color: orangered;
-  color: aliceblue;
-  border: none;
-  padding: 0px 5px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 
